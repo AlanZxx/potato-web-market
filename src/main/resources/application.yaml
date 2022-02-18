@@ -1,0 +1,36 @@
+# 应用名称
+spring:
+  application:
+    # 应用名称
+    name: marketweb
+  datasource:
+    # 数据库用户名&密码：
+    username: root
+    password: 123456
+    # 数据库连接地址
+    url: jdbc:mysql://127.0.0.1:3306/market?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    # 数据库驱动：
+    driver-class-name: com.mysql.cj.jdbc.Driver
+# 默认端口号
+server:
+  # 应用服务 WEB 访问端口
+  port: 8081
+  servlet:
+    contextPath: /potato-web-market
+##日志级别
+#logging:
+#  level:
+#    com:
+#      potato:
+#        #使用相对路径的方式设置日志输出的位置（项目根目录目录\my-log\mylog\spring.log）
+#        marketweb: trace
+#  file:
+#    #绝对路径方式将日志文件输出到 【项目所在磁盘根目录\springboot\logging\my\spring.log】
+#    path: /spring-boot/logging
+#  pattern:
+#    #控制台日志输出格式
+#    console: %d{yyyy-MM-dd hh:mm:ss} [%thread] %-5level %logger{50} - %msg%n
+#    #日志文件输出格式
+#    file: %d{yyyy-MM-dd} === [%thread] === %-5level === %logger{50} === - %msg%n
+
+
