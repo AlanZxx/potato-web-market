@@ -4,10 +4,7 @@ import com.potato.marketweb.commonUtil.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
@@ -29,7 +26,7 @@ public class Mall {
     @ResponseBody
     @RequestMapping("/getMallTypeList")
     public Result getMallTypeList() {
-        System.out.println("getMallTypeList");
+        System.out.println("@@@@@@@@@@ getMallTypeList");
         //访问数据库user表，查询user表的数据量
         List mallTypes = jdbcTemplate.queryForList("SELECT * from malltype");
         System.out.println(mallTypes.size());
@@ -41,6 +38,7 @@ public class Mall {
     @RequestMapping(value = "/addMallType", method = RequestMethod.POST)
     @Validated
     public Result addMallType(@RequestParam(value = "name") String name, @RequestParam(value = "detail", required = false) String detail) {
+        System.out.println("@@@@@@@@@@ addMallType");
         System.out.println(name);
         System.out.println(detail);
         List mallTypes = jdbcTemplate.queryForList("SELECT * from malltype where typeName = " + name);
@@ -60,6 +58,7 @@ public class Mall {
     @RequestMapping(value = "/delMallType", method = RequestMethod.POST)
     @Validated
     public Result delMallType(@RequestParam(value = "idList", required = false) String idList) {
+        System.out.println("@@@@@@@@@@ delMallType");
         String sql = "delete from malltype where typeId in (" + idList + ")";
         System.out.println(sql);
         jdbcTemplate.execute(sql);
@@ -70,7 +69,8 @@ public class Mall {
     @ResponseBody
     @RequestMapping(value = "/modMallType", method = RequestMethod.POST)
     @Validated
-    public Result modMallType(@RequestParam(value = "requestData", required = false) String requestData) {
+    public Result modMallType(@RequestBody Map requestData) {
+        System.out.println("@@@@@@@@@@ modMallType");
         System.out.println(requestData);
 //        String sql = "delete from malltype where typeId in (" + idList + ")";
 //        System.out.println(sql);
