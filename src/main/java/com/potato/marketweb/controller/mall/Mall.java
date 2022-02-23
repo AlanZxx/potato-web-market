@@ -1,5 +1,6 @@
 package com.potato.marketweb.controller.mall;
 
+import com.potato.marketweb.bean.MallType;
 import com.potato.marketweb.commonUtil.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +12,6 @@ import javax.sql.DataSource;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class Mall {
@@ -41,7 +41,7 @@ public class Mall {
         System.out.println("@@@@@@@@@@ addMallType");
         System.out.println(name);
         System.out.println(detail);
-        List mallTypes = jdbcTemplate.queryForList("SELECT * from malltype where typeName = " + name);
+        List mallTypes = jdbcTemplate.queryForList("SELECT * from malltype where typeName = '" + name+"'");
         if (mallTypes.size() != 0) {
             return Result.fail("当前已有种类");
         }
@@ -69,12 +69,14 @@ public class Mall {
     @ResponseBody
     @RequestMapping(value = "/modMallType", method = RequestMethod.POST)
     @Validated
-    public Result modMallType(@RequestBody Map requestData) {
+    public Result modMallType(@RequestBody MallType requestData) {
         System.out.println("@@@@@@@@@@ modMallType");
         System.out.println(requestData);
-//        String sql = "delete from malltype where typeId in (" + idList + ")";
-//        System.out.println(sql);
-//        jdbcTemplate.execute(sql);
+        String dateNowStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTimeInMillis());
+        System.out.println(dateNowStr);
+        String sql = "update malltype set typeName='"+requestData.getTypeName()+"', detail = '" + requestData.getDetail() + "' , updateTime = '" + dateNowStr + "' where typeId="+requestData.getTypeId();
+        System.out.println(sql);
+        jdbcTemplate.execute(sql);
         return Result.ok("修改成功");
     }
 }

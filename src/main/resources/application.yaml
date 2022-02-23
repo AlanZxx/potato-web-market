@@ -11,12 +11,16 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/market?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     # 数据库驱动：
     driver-class-name: com.mysql.cj.jdbc.Driver
+  jackson:
+    time-zone: GMT+8
 # 默认端口号
 server:
   # 应用服务 WEB 访问端口
   port: 8081
   servlet:
     contextPath: /potato-web-market
+
+
 ##日志级别
 #logging:
 #  level:
