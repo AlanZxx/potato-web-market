@@ -65,18 +65,15 @@ public class Mall {
         return Result.ok("删除成功");
     }
 
-    //    修改种类
+    //获取所有种类列表
     @ResponseBody
-    @RequestMapping(value = "/modMallType", method = RequestMethod.POST)
+    @RequestMapping(value = "/getMallTypeIdList", method = RequestMethod.GET)
     @Validated
-    public Result modMallType(@RequestBody MallType requestData) {
-        System.out.println("@@@@@@@@@@ modMallType");
-        System.out.println(requestData);
-        String dateNowStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTimeInMillis());
-        System.out.println(dateNowStr);
-        String sql = "update malltype set typeName='"+requestData.getTypeName()+"', detail = '" + requestData.getDetail() + "' , updateTime = '" + dateNowStr + "' where typeId="+requestData.getTypeId();
-        System.out.println(sql);
-        jdbcTemplate.execute(sql);
-        return Result.ok("修改成功");
+    public Result getMallTypeIdList() {
+        System.out.println("@@@@@@@@@@ getMallTypeIdList");
+        //访问数据库user表，查询user表的数据量
+        List mallTypes = jdbcTemplate.queryForList("SELECT typeId,typeName from malltype");
+        System.out.println(mallTypes.size());
+        return Result.ok(mallTypes);
     }
 }
