@@ -1,5 +1,6 @@
 package com.potato.marketweb.controller.mall;
 
+import com.potato.marketweb.bean.Goods;
 import com.potato.marketweb.bean.MallType;
 import com.potato.marketweb.commonUtil.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import javax.sql.DataSource;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class Mall {
@@ -71,9 +74,68 @@ public class Mall {
     @Validated
     public Result getMallTypeIdList() {
         System.out.println("@@@@@@@@@@ getMallTypeIdList");
+        Map<String,List> resultMap = new HashMap<>();
         //访问数据库user表，查询user表的数据量
-        List mallTypes = jdbcTemplate.queryForList("SELECT typeId,typeName from malltype");
+        List mallTypes = jdbcTemplate.queryForList("SELECT typeId as id,typeName as name from malltype");
+        List saleTypes = jdbcTemplate.queryForList("SELECT saleTypeId as id,saleTypeName as name from saletype");
+        System.out.println(mallTypes.size());
+        System.out.println(saleTypes.size());
+        resultMap.put("mallTypeList",mallTypes);
+        resultMap.put("saleTypeList",saleTypes);
+        return Result.ok(resultMap);
+    }
+
+
+    //    新增商品
+    @ResponseBody
+    @RequestMapping(value = "/addGoods", method = RequestMethod.POST)
+    @Validated
+    public Result addGoods(@RequestBody Goods goods) {
+        System.out.println("@@@@@@@@@@ addGoods");
+        System.out.println(goods);
+        List goodlist = jdbcTemplate.queryForList("SELECT * from goods where goodName = '" + goods.getGoodsName()+"'");
+        if (goodlist.size() != 0) {
+            return Result.fail("当前商品已存在");
+        }
+        String dateNowStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTimeInMillis());
+        System.out.println(dateNowStr);
+        String sql = "INSERT INTO `goods` (`goodId`, `goodName`, `mallType`, `saleType`, `counts`, `detail`) VALUES " +
+                "("+goods.getGoodsId()+", '"+goods.getGoodsName()+"', "+goods.getTypeId()+", "+goods.getSallType()+", "+goods.getCounts()+", '"+goods.getDetail()+"');\n";
+        System.out.println(sql);
+        jdbcTemplate.execute(sql);
+        return Result.ok("添加成功");
+    }
+
+
+    //    查询商品列表
+    @ResponseBody
+    @RequestMapping("/getGoodList")
+    public Result getGoodList() {
+        System.out.println("@@@@@@@@@@ getGoodList");
+        List mallTypes = jdbcTemplate.queryForList("SELECT * from goods");
         System.out.println(mallTypes.size());
         return Result.ok(mallTypes);
+    }
+
+    //    修改商品
+    @ResponseBody
+    @RequestMapping(value = "/modGoods", method = RequestMethod.POST)
+    @Validated
+    public Result modGoods(@RequestBody Goods goods) {
+        System.out.println("@@@@@@@@@@ modGoods");
+        System.out.println(goods);
+        String dateNowStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTimeInMillis());
+        System.out.println(dateNowStr);
+        String sql = "UPDATE `goods` " +
+                "SET " +
+                "`goodName` = '"+goods.getGoodsName()+"', " +
+                "`mallType` = "+goods.getTypeId()+", " +
+                "`saleType` = "+goods.getCounts()+", " +
+                "`counts` = "+goods.getCounts()+", " +
+                "`detail` = '"+goods.getDetail()+"' " +
+                "WHERE `goodId` = "+goods.getGoodsId()+";";
+        System.out.println(sql);
+        jdbcTemplate.execute(sql);
+        return Result.ok("添加成功");
     }
 }
