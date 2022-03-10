@@ -2,6 +2,7 @@ package com.potato.marketweb.controller.mall;
 
 import com.potato.marketweb.bean.Goods;
 import com.potato.marketweb.bean.MallType;
+import com.potato.marketweb.bean.SaleType;
 import com.potato.marketweb.commonUtil.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -154,4 +155,42 @@ public class Mall {
         jdbcTemplate.execute(sql);
         return Result.ok("删除成功");
     }
+
+
+
+    //    新增销售方式
+    @ResponseBody
+    @RequestMapping(value = "/addSaleType", method = RequestMethod.POST)
+    @Validated
+    public Result addSaleType(@RequestBody SaleType saleType) {
+        System.out.println("@@@@@@@@@@ saleType");
+        System.out.println(saleType);
+        List goodlist = jdbcTemplate.queryForList("SELECT * from goods where goodName = '" + saleType.getSaleTypeName()+"'");
+        if (goodlist.size() != 0) {
+            return Result.fail("当前商品已存在");
+        }
+        String dateNowStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTimeInMillis());
+        System.out.println(dateNowStr);
+        String sql = "INSERT INTO `market`.`saletype`( `saleTypeName`, `goodsCount`, `detail`, `addTime`, `updateTime`) VALUES " +
+                "('"+saleType.getSaleTypeName()+"', "+saleType.getGoodsCount()+", '"+saleType.getDetail()+"', '"+dateNowStr+"', '"+dateNowStr+"')";
+        System.out.println(sql);
+        jdbcTemplate.execute(sql);
+        return Result.ok("添加成功");
+    }
+
+
+    //    查询售卖方式列表
+    @ResponseBody
+    @RequestMapping("/getSaleTypeList")
+    public Result getSaleTypeList() {
+        System.out.println("@@@@@@@@@@ getSaleTypeList");
+        String sql = "select * from saleType";
+        System.out.println(sql);
+        List mallTypes = jdbcTemplate.queryForList(sql);
+        System.out.println(mallTypes.size());
+        return Result.ok(mallTypes);
+    }
+
+
+
 }

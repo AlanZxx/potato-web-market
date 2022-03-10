@@ -1,17 +1,17 @@
 /*
- Navicat MySQL Data Transfer
+ Navicat Premium Data Transfer
 
- Source Server         : mysql_spdb
+ Source Server         : mysql
  Source Server Type    : MySQL
- Source Server Version : 50736
+ Source Server Version : 50649
  Source Host           : localhost:3306
  Source Schema         : market
 
  Target Server Type    : MySQL
- Target Server Version : 50736
+ Target Server Version : 50649
  File Encoding         : 65001
 
- Date: 10/03/2022 18:23:02
+ Date: 10/03/2022 22:37:43
 */
 
 SET NAMES utf8mb4;
@@ -32,6 +32,6 @@ CREATE TABLE `goods`  (
   `priceDis` decimal(10, 2) NOT NULL COMMENT '折扣价格',
   `discount` float(10, 2) NOT NULL COMMENT '折扣力度',
   PRIMARY KEY (`goodId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 SET FOREIGN_KEY_CHECKS = 1;
