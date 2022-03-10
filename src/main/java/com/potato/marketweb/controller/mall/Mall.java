@@ -99,11 +99,12 @@ public class Mall {
         }
         String dateNowStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTimeInMillis());
         System.out.println(dateNowStr);
-        String sql = "INSERT INTO `goods` (`goodId`, `goodName`, `mallType`, `saleType`, `counts`, `detail`) VALUES " +
-                "("+goods.getGoodsId()+", '"+goods.getGoodsName()+"', "+goods.getTypeId()+", "+goods.getSallType()+", "+goods.getCounts()+", '"+goods.getDetail()+"');\n";
+        String sql = "INSERT INTO `market`.`goods` (`goodId`, `goodName`, `mallType`, `saleType`, `counts`, `detail`, `price`, `priceDis`, `discount`) VALUES \n" +
+                "("+goods.getGoodsId()+", '"+goods.getGoodsName()+"', "+goods.getTypeId()+", "+goods.getSallType()+", "+goods.getCounts()+", '"+goods.getDetail()+"', "+goods.getPrice()+", "+goods.getPriceDis()+", "+goods.getDiscount()+");\n";
         System.out.println(sql);
         jdbcTemplate.execute(sql);
         return Result.ok("添加成功");
+
     }
 
 
@@ -112,7 +113,10 @@ public class Mall {
     @RequestMapping("/getGoodList")
     public Result getGoodList() {
         System.out.println("@@@@@@@@@@ getGoodList");
-        List mallTypes = jdbcTemplate.queryForList("SELECT * from goods");
+        String sql = "SELECT * from goods g left join saletype s on  g.saletype = s.saleTypeId\n" +
+                "left join malltype m on g.mallType = m.typeId";
+        System.out.println(sql);
+        List mallTypes = jdbcTemplate.queryForList(sql);
         System.out.println(mallTypes.size());
         return Result.ok(mallTypes);
     }
@@ -137,5 +141,17 @@ public class Mall {
         System.out.println(sql);
         jdbcTemplate.execute(sql);
         return Result.ok("添加成功");
+    }
+
+    //    删除种类
+    @ResponseBody
+    @RequestMapping(value = "/delGoods", method = RequestMethod.POST)
+    @Validated
+    public Result delGoods(@RequestParam(value = "idList", required = false) String idList) {
+        System.out.println("@@@@@@@@@@ delMallType");
+        String sql = "delete from goods where goodid in (" + idList + ")";
+        System.out.println(sql);
+        jdbcTemplate.execute(sql);
+        return Result.ok("删除成功");
     }
 }

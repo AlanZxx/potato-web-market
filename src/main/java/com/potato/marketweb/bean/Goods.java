@@ -7,6 +7,9 @@ public class Goods {
     private int sallType;
     private int counts;
     private String detail;
+    private float price;
+    private float priceDis;
+    private float discount;
 
     public int getGoodsId() {
         return goodsId;
@@ -56,6 +59,30 @@ public class Goods {
         this.detail = detail;
     }
 
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public float getPriceDis() {
+        return priceDis;
+    }
+
+    public void setPriceDis(float priceDis) {
+        this.priceDis = priceDis;
+    }
+
+    public float getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(float discount) {
+        this.discount = discount;
+    }
+
     @Override
     public String toString() {
         return "Goods{" +
@@ -65,6 +92,9 @@ public class Goods {
                 ", sallType=" + sallType +
                 ", counts=" + counts +
                 ", detail='" + detail + '\'' +
+                ", price=" + price +
+                ", priceDis=" + priceDis +
+                ", discount=" + discount +
                 '}';
     }
 }

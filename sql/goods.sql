@@ -11,7 +11,7 @@
  Target Server Version : 50736
  File Encoding         : 65001
 
- Date: 09/03/2022 18:14:13
+ Date: 10/03/2022 18:23:02
 */
 
 SET NAMES utf8mb4;
@@ -28,7 +28,10 @@ CREATE TABLE `goods`  (
   `saleType` int(255) NOT NULL COMMENT '售卖种类id',
   `counts` int(255) NOT NULL COMMENT '商品库存量',
   `detail` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
+  `price` decimal(10, 2) NOT NULL COMMENT '商品价格',
+  `priceDis` decimal(10, 2) NOT NULL COMMENT '折扣价格',
+  `discount` float(10, 2) NOT NULL COMMENT '折扣力度',
   PRIMARY KEY (`goodId`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;
