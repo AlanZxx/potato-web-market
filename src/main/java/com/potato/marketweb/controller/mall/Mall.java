@@ -193,4 +193,40 @@ public class Mall {
 
 
 
+    //    删除销售方式
+    @ResponseBody
+    @RequestMapping(value = "/delSaleType", method = RequestMethod.POST)
+    @Validated
+    public Result delSaleType(@RequestParam(value = "idList", required = false) String idList) {
+        System.out.println("@@@@@@@@@@ delSaleType");
+        String sql = "delete from saletype where saleTypeId in (" + idList + ")";
+        System.out.println(sql);
+        jdbcTemplate.execute(sql);
+        return Result.ok("删除成功");
+    }
+
+
+
+    //    修改商品
+    @ResponseBody
+    @RequestMapping(value = "/modSaleType", method = RequestMethod.POST)
+    @Validated
+    public Result modSaleType(@RequestBody SaleType mallType) {
+        System.out.println("@@@@@@@@@@ modSaleType");
+        System.out.println(mallType.toString());
+        String dateNowStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTimeInMillis());
+        System.out.println(dateNowStr);
+        String sql ="UPDATE `market`.`saletype` SET " +
+                "`saleTypeName` = '"+mallType.getSaleTypeName()+"', " +
+                "`detail` = '"+mallType.getDetail()+"', " +
+                " `updateTime` = '"+dateNowStr+"' " +
+                "WHERE " +
+                "`saleTypeId` = "+mallType.getSaleTypeId()+";";
+        System.out.println(sql);
+        jdbcTemplate.execute(sql);
+        return Result.ok("修改成功");
+    }
+
+
+
 }
