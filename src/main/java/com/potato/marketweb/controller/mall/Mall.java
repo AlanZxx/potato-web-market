@@ -41,17 +41,16 @@ public class Mall {
     @ResponseBody
     @RequestMapping(value = "/addMallType", method = RequestMethod.POST)
     @Validated
-    public Result addMallType(@RequestParam(value = "name") String name, @RequestParam(value = "detail", required = false) String detail) {
+    public Result addMallType(@RequestBody MallType mallType) {
         System.out.println("@@@@@@@@@@ addMallType");
-        System.out.println(name);
-        System.out.println(detail);
-        List mallTypes = jdbcTemplate.queryForList("SELECT * from malltype where typeName = '" + name+"'");
+        System.out.println(mallType.toString());
+        List mallTypes = jdbcTemplate.queryForList("SELECT * from malltype where typeName = '" + mallType.getTypeName()+"'");
         if (mallTypes.size() != 0) {
             return Result.fail("当前已有种类");
         }
         String dateNowStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTimeInMillis());
         System.out.println(dateNowStr);
-        String sql = "insert malltype (typeName,addTime,detail) values('" + name + "','" + dateNowStr + "','" + detail + "')";
+        String sql = "insert malltype (typeName,addTime,detail) values('" + mallType.getTypeName() + "','" + dateNowStr + "','" + mallType.getDetail() + "')";
         System.out.println(sql);
         jdbcTemplate.execute(sql);
         return Result.ok("添加成功");
@@ -85,6 +84,27 @@ public class Mall {
         resultMap.put("saleTypeList",saleTypes);
         return Result.ok(resultMap);
     }
+
+    //    修改商品种类
+    @ResponseBody
+    @RequestMapping(value = "/modMallType", method = RequestMethod.POST)
+    @Validated
+    public Result modMallType(@RequestBody MallType mallType) {
+        System.out.println("@@@@@@@@@@ modMallType");
+        System.out.println(mallType);
+        String dateNowStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTimeInMillis());
+        System.out.println(dateNowStr);
+        String sql = "UPDATE `malltype` \n" +
+                "SET `typeName` = '"+mallType.getTypeName()+"',\n" +
+                "`updateTime` = '"+dateNowStr+"',\n" +
+                "`detail` = '"+mallType.getDetail()+"' \n" +
+                "WHERE\n" +
+                "\t`typeId` = "+mallType.getTypeId();
+        System.out.println(sql);
+        jdbcTemplate.execute(sql);
+        return Result.ok("修改成功");
+    }
+
 
 
     //    新增商品

@@ -65,4 +65,17 @@ public class MallType {
     public void setAddTime(String addTime) {
         this.addTime = addTime;
     }
+
+    @Override
+    public String toString() {
+        return "MallType{" +
+                "typeId=" + typeId +
+                ", typeName='" + typeName + '\'' +
+                ", mallCounts=" + mallCounts +
+                ", mallTypeStatus=" + mallTypeStatus +
+                ", detail='" + detail + '\'' +
+                ", updateTime='" + updateTime + '\'' +
+                ", addTime='" + addTime + '\'' +
+                '}';
+    }
 }
