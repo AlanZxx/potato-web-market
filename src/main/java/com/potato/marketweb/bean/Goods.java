@@ -1,22 +1,22 @@
 package com.potato.marketweb.bean;
 
 public class Goods {
-    private int goodsId;
+    private int goodId;
     private String goodsName;
     private int typeId;
-    private int sallType;
+    private int sallTypeId;
     private int counts;
     private String detail;
     private float price;
     private float priceDis;
     private float discount;
 
-    public int getGoodsId() {
-        return goodsId;
+    public int getGoodId() {
+        return goodId;
     }
 
-    public void setGoodsId(int goodsId) {
-        this.goodsId = goodsId;
+    public void setGoodId(int goodId) {
+        this.goodId = goodId;
     }
 
     public String getGoodsName() {
@@ -35,12 +35,12 @@ public class Goods {
         this.typeId = typeId;
     }
 
-    public int getSallType() {
-        return sallType;
+    public int getSallTypeId() {
+        return sallTypeId;
     }
 
-    public void setSallType(int sallType) {
-        this.sallType = sallType;
+    public void setSallTypeId(int sallTypeId) {
+        this.sallTypeId = sallTypeId;
     }
 
     public int getCounts() {
@@ -81,20 +81,5 @@ public class Goods {
 
     public void setDiscount(float discount) {
         this.discount = discount;
-    }
-
-    @Override
-    public String toString() {
-        return "Goods{" +
-                "goodsId=" + goodsId +
-                ", goodsName='" + goodsName + '\'' +
-                ", typeId=" + typeId +
-                ", sallType=" + sallType +
-                ", counts=" + counts +
-                ", detail='" + detail + '\'' +
-                ", price=" + price +
-                ", priceDis=" + priceDis +
-                ", discount=" + discount +
-                '}';
     }
 }

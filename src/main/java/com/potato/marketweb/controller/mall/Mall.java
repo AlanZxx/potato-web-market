@@ -120,8 +120,8 @@ public class Mall {
         }
         String dateNowStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTimeInMillis());
         System.out.println(dateNowStr);
-        String sql = "INSERT INTO `market`.`goods` (`goodId`, `goodName`, `mallType`, `saleType`, `counts`, `detail`, `price`, `priceDis`, `discount`) VALUES \n" +
-                "("+goods.getGoodsId()+", '"+goods.getGoodsName()+"', "+goods.getTypeId()+", "+goods.getSallType()+", "+goods.getCounts()+", '"+goods.getDetail()+"', "+goods.getPrice()+", "+goods.getPriceDis()+", "+goods.getDiscount()+");\n";
+        String sql = "INSERT INTO `market`.`goods` (`goodId`, `goodName`, `mallTypeId`, `saleTypeId`, `counts`, `detail`, `price`, `priceDis`, `discount`) VALUES \n" +
+                "("+goods.getGoodId()+", '"+goods.getGoodsName()+"', "+goods.getTypeId()+", "+goods.getSallTypeId()+", "+goods.getCounts()+", '"+goods.getDetail()+"', "+goods.getPrice()+", "+goods.getPriceDis()+", "+goods.getDiscount()+");\n";
         System.out.println(sql);
         jdbcTemplate.execute(sql);
         return Result.ok("添加成功");
@@ -134,8 +134,8 @@ public class Mall {
     @RequestMapping("/getGoodList")
     public Result getGoodList() {
         System.out.println("@@@@@@@@@@ getGoodList");
-        String sql = "SELECT * from goods g left join saletype s on  g.saletype = s.saleTypeId\n" +
-                "left join malltype m on g.mallType = m.typeId";
+        String sql = "SELECT * from goods g left join saletype s on  g.saletypeId = s.saleTypeId\n" +
+                "left join malltype m on g.mallTypeId = m.typeId";
         System.out.println(sql);
         List mallTypes = jdbcTemplate.queryForList(sql);
         System.out.println(mallTypes.size());
@@ -154,11 +154,11 @@ public class Mall {
         String sql = "UPDATE `goods` " +
                 "SET " +
                 "`goodName` = '"+goods.getGoodsName()+"', " +
-                "`mallType` = "+goods.getTypeId()+", " +
-                "`saleType` = "+goods.getCounts()+", " +
+                "`mallTypeId` = "+goods.getTypeId()+", " +
+                "`saleTypeId` = "+goods.getCounts()+", " +
                 "`counts` = "+goods.getCounts()+", " +
                 "`detail` = '"+goods.getDetail()+"' " +
-                "WHERE `goodId` = "+goods.getGoodsId()+";";
+                "WHERE `goodId` = "+goods.getGoodId()+";";
         System.out.println(sql);
         jdbcTemplate.execute(sql);
         return Result.ok("添加成功");
