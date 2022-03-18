@@ -113,15 +113,15 @@ public class Mall {
     @Validated
     public Result addGoods(@RequestBody Goods goods) {
         System.out.println("@@@@@@@@@@ addGoods");
-        System.out.println(goods);
-        List goodlist = jdbcTemplate.queryForList("SELECT * from goods where goodName = '" + goods.getGoodsName()+"'");
+        System.out.println(goods.toString());
+        List goodlist = jdbcTemplate.queryForList("SELECT * from goods where goodName = '" + goods.getGoodName()+"'");
         if (goodlist.size() != 0) {
             return Result.fail("当前商品已存在");
         }
         String dateNowStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTimeInMillis());
         System.out.println(dateNowStr);
         String sql = "INSERT INTO `market`.`goods` (`goodId`, `goodName`, `mallTypeId`, `saleTypeId`, `counts`, `detail`, `price`, `priceDis`, `discount`) VALUES \n" +
-                "("+goods.getGoodId()+", '"+goods.getGoodsName()+"', "+goods.getTypeId()+", "+goods.getSallTypeId()+", "+goods.getCounts()+", '"+goods.getDetail()+"', "+goods.getPrice()+", "+goods.getPriceDis()+", "+goods.getDiscount()+");\n";
+                "("+goods.getGoodId()+", '"+goods.getGoodName()+"', "+goods.getTypeId()+", "+goods.getSaleTypeId()+", "+goods.getCounts()+", '"+goods.getDetail()+"', "+goods.getPrice()+", "+goods.getPriceDis()+", "+goods.getDiscount()+");\n";
         System.out.println(sql);
         jdbcTemplate.execute(sql);
         return Result.ok("添加成功");
@@ -153,10 +153,13 @@ public class Mall {
         System.out.println(dateNowStr);
         String sql = "UPDATE `goods` " +
                 "SET " +
-                "`goodName` = '"+goods.getGoodsName()+"', " +
+                "`goodName` = '"+goods.getGoodName()+"', " +
                 "`mallTypeId` = "+goods.getTypeId()+", " +
-                "`saleTypeId` = "+goods.getCounts()+", " +
+                "`saleTypeId` = "+goods.getSaleTypeId()+", " +
                 "`counts` = "+goods.getCounts()+", " +
+                "`price` = "+goods.getPrice()+", " +
+                "`priceDis` = "+goods.getPriceDis()+", " +
+                "`discount` = "+goods.getDiscount()+", " +
                 "`detail` = '"+goods.getDetail()+"' " +
                 "WHERE `goodId` = "+goods.getGoodId()+";";
         System.out.println(sql);
@@ -164,7 +167,7 @@ public class Mall {
         return Result.ok("添加成功");
     }
 
-    //    删除种类
+    //    删除商品
     @ResponseBody
     @RequestMapping(value = "/delGoods", method = RequestMethod.POST)
     @Validated
