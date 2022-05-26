@@ -20,21 +20,31 @@ server:
   servlet:
     contextPath: /potato-web-market
 
+###################################### MyBatis 配置######################################
+mybatis:
+  # 指定 mapper.xml 的位置
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  #扫描实体类的位置,在此处指明扫描实体类的包，在 mapper.xml 中就可以不写实体类的全路径名
+  type-aliases-package: com.potato.marketweb.bean
+  configuration:
+    #默认开启驼峰命名法，可以不用设置该属性
+    map-underscore-to-camel-case: true
 
 ##日志级别
-#logging:
-#  level:
-#    com:
-#      potato:
-#        #使用相对路径的方式设置日志输出的位置（项目根目录目录\my-log\mylog\spring.log）
-#        marketweb: trace
-#  file:
-#    #绝对路径方式将日志文件输出到 【项目所在磁盘根目录\springboot\logging\my\spring.log】
-#    path: /spring-boot/logging
-#  pattern:
-#    #控制台日志输出格式
-#    console: %d{yyyy-MM-dd hh:mm:ss} [%thread] %-5level %logger{50} - %msg%n
-#    #日志文件输出格式
-#    file: %d{yyyy-MM-dd} === [%thread] === %-5level === %logger{50} === - %msg%n
+logging:
+  level:
+    com:
+      potato:
+        marketweb: trace
+  file:
+#    #使用相对路径的方式设置日志输出的位置（项目根目录目录\my-log\mylog\spring.log）
+#    path: my-log/myLog
+    #绝对路径方式将日志文件输出到 【项目所在磁盘根目录\springboot\logging\my\spring.log】
+    path: /spring-boot/logging
+  pattern:
+    #控制台日志输出格式
+    console: "%d{yyyy-MM-dd hh:mm:ss} [%thread] %-5level %logger{50} - %msg%n"
+    #日志文件输出格式
+    file: "%d{yyyy-MM-dd} === [%thread] === %-5level === %logger{50} === - %msg%n"
 
 

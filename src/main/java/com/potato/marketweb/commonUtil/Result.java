@@ -1,31 +1,99 @@
 package com.potato.marketweb.commonUtil;
 
-public class Result {
+public class Result<T> {
     private static final int SUCCESS = 200;
     private static final int FAILED = 500;
-    private int code;
+    private long code;
     private String message;
-    private Object data;
+    private T data;
 
-    public Result(int code, String message, Object data) {
+    public Result(long code, String message, T data) {
         this.code = code;
         this.message = message;
         this.data = data;
     }
 
-    public static Result ok(Object data) {
-        return new Result(SUCCESS, "success", data);
+    /**
+     * 成功返回结果
+     *
+     * @param data 获取的数据
+     */
+    public static <T> Result<T> success(T data) {
+        return new Result<T>(ResultCode.SUCCESS.getCode(), ResultCode.SUCCESS.getMessage(), data);
     }
 
-    public static Result fail(String message) {
-        return new Result(FAILED, message, null);
+
+    /**
+     * 成功返回结果
+     *
+     * @param data    获取的数据
+     * @param message 提示的信息
+     */
+    public static <T> Result<T> success(T data, String message) {
+        return new Result<T>(ResultCode.SUCCESS.getCode(), message, data);
     }
 
-    public int getCode() {
+    /**
+     * 失败返回结果
+     *
+     * @param errCode 错误码
+     */
+    public static <T> Result<T> failed(ErrCode errCode) {
+        return new Result<T>(errCode.getCode(), errCode.getMessage(), null);
+    }
+
+    /**
+     * 失败返回结果
+     *
+     * @param message 提示信息
+     */
+    public static <T> Result<T> failed(String message) {
+        return new Result<T>(ResultCode.FAILED.getCode(), message, null);
+    }
+
+
+    /**
+     * 失败返回结果
+     */
+    public static <T> Result<T> failed() {
+        return failed(ResultCode.FAILED);
+    }
+
+    /**
+     * 参数验证失败返回结果
+     */
+    public static <T> Result<T> validateFailed() {
+        return failed(ResultCode.VALIDATE_FAILED);
+    }
+
+    /**
+     * 参数验证失败返回结果
+     *
+     * @param message 提示信息
+     */
+    public static <T> Result<T> validateFailed(String message) {
+        return new Result<T>(ResultCode.VALIDATE_FAILED.getCode(), message, null);
+    }
+
+    /**
+     * 未登录返回结果
+     */
+    public static <T> Result<T> unauthorized(T data) {
+        return new Result<T>(ResultCode.UNAUTHORIZED.getCode(), ResultCode.UNAUTHORIZED.getMessage(), data);
+    }
+
+    /**
+     * 未授权返回结果
+     */
+    public static <T> Result<T> forbidden(T data) {
+        return new Result<T>(ResultCode.FORBIDDEN.getCode(), ResultCode.FORBIDDEN.getMessage(), data);
+    }
+
+    public long getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(long code) {
         this.code = code;
     }
 
@@ -37,11 +105,12 @@ public class Result {
         this.message = message;
     }
 
-    public Object getData() {
+    public T getData() {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(T data) {
         this.data = data;
     }
+
 }
