@@ -11,4 +11,6 @@ public interface SaleTypeService {
     int delSaleType(String idList);
 
     List<SaleType> getSaleTypeList();
+
+    int addSaleType(SaleType saleType);
 }

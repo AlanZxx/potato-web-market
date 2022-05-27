@@ -91,4 +91,6 @@ public class MallController {
             return Result.failed();
         }
     }
+
+
 }

@@ -3,6 +3,7 @@ package com.potato.marketweb.mapper;
 import com.potato.marketweb.bean.SaleType;
 import com.potato.marketweb.commonUtil.Result;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -18,4 +19,7 @@ public interface SaleTypeMapper {
     int delSaleType(String idList);
     @Select("select * from saleType")
     List<SaleType> getSaleTypeList();
+    @Insert("INSERT INTO `market`.`saletype`( `saleTypeName`, `goodsCount`, `detail`, `addTime`, `updateTime`) VALUES \" +\n" +
+            "                \"('\"+saleType.getSaleTypeName()+\"', \"+saleType.getGoodsCount()+\", '\"+saleType.getDetail()+\"', '\"+dateNowStr+\"', '\"+dateNowStr+\"');")
+    int addSaleType(SaleType saleType);
 }

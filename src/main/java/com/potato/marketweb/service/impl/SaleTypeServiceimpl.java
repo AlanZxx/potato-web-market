@@ -27,4 +27,9 @@ public class SaleTypeServiceimpl implements SaleTypeService {
     public List<SaleType> getSaleTypeList() {
         return saleTypeMapper.getSaleTypeList();
     }
+
+    @Override
+    public int addSaleType(SaleType saleType) {
+        return saleTypeMapper.addSaleType(saleType);
+    }
 }
