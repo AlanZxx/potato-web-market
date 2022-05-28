@@ -10,4 +10,5 @@ public interface GoodsService {
     int addGoods(Goods goods);
     int modGoods(Goods goods);
     int delGoods(String idList);
+    Goods queryGoodsById(String goodName);
 }

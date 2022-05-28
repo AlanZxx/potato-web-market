@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class MallController {
+public class MallTypeController {
     @Autowired
     MallService mallServicel;
     @Autowired
@@ -41,11 +41,12 @@ public class MallController {
 ////            return Result.fail("当前已有种类");
 //        }
         String dateNowStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTimeInMillis());
-        int a = mallServicel.addMallType(new MallType());
-        if (a == 1) {
+        mallType.setCreateTime(dateNowStr);
+        mallType.setUpdateTime(dateNowStr);
+        if (mallServicel.addMallType(mallType) == 1) {
             return Result.success("添加成功");
         } else {
-            return Result.failed();
+            return Result.failed("添加失败");
         }
     }
 
@@ -66,6 +67,20 @@ public class MallController {
     //获取所有种类列表
     @ResponseBody
     @RequestMapping(value = "/getMallTypeIdList", method = RequestMethod.GET)
+    @Validated
+    public Result getMallTypeIdList() {
+        Map<String, List> resultMap = new HashMap<>();
+        //访问数据库user表，查询user表的数据量
+        List mallTypes = mallServicel.getIdNameFromMallType();
+        List saleTypes = saleTypeService.getIdNameFromSaleType();
+        resultMap.put("mallTypeList", mallTypes);
+        resultMap.put("saleTypeList", saleTypes);
+        return Result.success(resultMap);
+    }
+
+    //根据id获取种类
+    @ResponseBody
+    @RequestMapping(value = "/getMallTypeIdList", method = RequestMethod.POST)
     @Validated
     public Result getMallTypeIdList() {
         Map<String, List> resultMap = new HashMap<>();

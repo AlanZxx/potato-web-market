@@ -7,13 +7,15 @@ import java.util.List;
 import java.util.Map;
 
 @Mapper
-public interface MallMapper {
+public interface MallTypeMapper {
     //查找所有的商品种类
     @Select("SELECT * from malltype")
     List<MallType> getMallTypeList();
 
     //添加商品种类
-    @Insert("insert malltype (typeName,addTime,detail) values('\" + #{typeName,jdbcType=VARCHAR} + \"','\" + #{addTime,jdbcType=VARCHAR} + \"','\" + #{detail,jdbcType=VARCHAR} + \"')")
+    @Insert("INSERT INTO `market`.`malltype` (  `mallTypeName`, `mallCounts`, `mallTypeStatus`, `createTime`, `updateTime`, `detail` )\n" +
+            "VALUES\n" +
+            "\t( #{mallTypeName} ,#{mallCounts} ,#{mallTypeStatus}, #{createTime}, #{updateTime}, #{detail} );")
     int addMallType(MallType mallType);
 
     //添加商品种类

@@ -2,28 +2,28 @@ package com.potato.marketweb.bean;
 
 public class MallType {
 
-    private int typeId;
-    private String typeName;
+    private int mallTypeId;
+    private String mallTypeName;
     private int mallCounts;
     private int mallTypeStatus;
-    private String detail;
+    private String createTime;
     private String updateTime;
-    private String addTime;
+    private String detail;
 
-    public int getTypeId() {
-        return typeId;
+    public int getMallTypeId() {
+        return mallTypeId;
     }
 
-    public void setTypeId(int typeId) {
-        this.typeId = typeId;
+    public void setMallTypeId(int mallTypeId) {
+        this.mallTypeId = mallTypeId;
     }
 
-    public String getTypeName() {
-        return typeName;
+    public String getMallTypeName() {
+        return mallTypeName;
     }
 
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
+    public void setMallTypeName(String mallTypeName) {
+        this.mallTypeName = mallTypeName;
     }
 
     public int getMallCounts() {
@@ -42,12 +42,12 @@ public class MallType {
         this.mallTypeStatus = mallTypeStatus;
     }
 
-    public String getDetail() {
-        return detail;
+    public String getCreateTime() {
+        return createTime;
     }
 
-    public void setDetail(String detail) {
-        this.detail = detail;
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 
     public String getUpdateTime() {
@@ -58,24 +58,24 @@ public class MallType {
         this.updateTime = updateTime;
     }
 
-    public String getAddTime() {
-        return addTime;
+    public String getDetail() {
+        return detail;
     }
 
-    public void setAddTime(String addTime) {
-        this.addTime = addTime;
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 
     @Override
     public String toString() {
         return "MallType{" +
-                "typeId=" + typeId +
-                ", typeName='" + typeName + '\'' +
+                "mallTypeId=" + mallTypeId +
+                ", mallTypeName='" + mallTypeName + '\'' +
                 ", mallCounts=" + mallCounts +
                 ", mallTypeStatus=" + mallTypeStatus +
-                ", detail='" + detail + '\'' +
+                ", createTime='" + createTime + '\'' +
                 ", updateTime='" + updateTime + '\'' +
-                ", addTime='" + addTime + '\'' +
+                ", detail='" + detail + '\'' +
                 '}';
     }
 }

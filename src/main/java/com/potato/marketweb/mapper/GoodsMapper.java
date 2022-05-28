@@ -10,24 +10,29 @@ import java.util.Map;
 @Mapper
 public interface GoodsMapper {
 
-    @Insert("INSERT INTO `market`.`goods` (`goodId`, `goodName`, `mallTypeId`, `saleTypeId`, `counts`, `detail`, `price`, `priceDis`, `discount`) VALUES \\n\" +\n" +
-            "            \"(\"+goods.getGoodId()+\", '\"+goods.getGoodName()+\"', \"+goods.getTypeId()+\", \"+goods.getSaleTypeId()+\", \"+goods.getCounts()+\", '\"+goods.getDetail()+\"', \"+goods.getPrice()+\", \"+goods.getPriceDis()+\", \"+goods.getDiscount()+\");\\n")
+    @Insert("INSERT INTO `market`.`goods` ( `goodId`, `goodName`, `mallTypeId`, `saleTypeId`, `counts`, `detail`, `price`, `priceDis`, `discount`,`createTime`, `updateTime` )\n" +
+            "VALUES\n" +
+            "\t( #{goodId,jdbcType=VARCHAR},#{goodName,jdbcType=VARCHAR},#{mallTypeId},#{saleTypeId},#{counts},#{detail,jdbcType=VARCHAR},#{price},#{priceDis},#{discount},#{createTime,jdbcType=VARCHAR},#{updateTime,jdbcType=VARCHAR});")
     int addGoods(Goods goods);
 
-    @Update("UPDATE `goods` \" +\n" +
-            "                \"SET \" +\n" +
-            "                \"`goodName` = '\"+goods.getGoodName()+\"', \" +\n" +
-            "                \"`mallTypeId` = \"+goods.getTypeId()+\", \" +\n" +
-            "                \"`saleTypeId` = \"+goods.getSaleTypeId()+\", \" +\n" +
-            "                \"`counts` = \"+goods.getCounts()+\", \" +\n" +
-            "                \"`price` = \"+goods.getPrice()+\", \" +\n" +
-            "                \"`priceDis` = \"+goods.getPriceDis()+\", \" +\n" +
-            "                \"`discount` = \"+goods.getDiscount()+\", \" +\n" +
-            "                \"`detail` = '\"+goods.getDetail()+\"' \" +\n" +
-            "                \"WHERE `goodId` = \"+goods.getGoodId()+\";")
+    @Update("UPDATE `market`.`goods` \n" +
+            "SET `goodName` = #{goodName,jdbcType=VARCHAR},\n" +
+            "`mallTypeId` =#{mallTypeId} ,\n" +
+            "`saleTypeId` = #{saleTypeId},\n" +
+            "`counts` = #{counts},\n" +
+            "`detail` = #{detail,jdbcType=VARCHAR},\n" +
+            "`price` = #{price},\n" +
+            "`priceDis` =#{priceDis} ,\n" +
+            "`discount` = #{discount},\n" +
+            "`updateTime` =  #{updateTime,jdbcType=VARCHAR}\n" +
+            "WHERE\n" +
+            "\t`goodId` = #{goodId,jdbcType=VARCHAR};")
     int modGoods(Goods goods);
 
-    @Delete("delete from goods where goodid in (\" + idList + \")")
+    @Delete("delete from goods where goodid in ( ${idList})")
     int delGoods(String idList);
+
+    @Select("select * from goods where goodId = #{goodId,jdbcType=VARCHAR};")
+    Goods queryGoodsById(String goodId);
 
 }

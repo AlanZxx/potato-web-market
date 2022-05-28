@@ -1,22 +1,24 @@
 package com.potato.marketweb.bean;
 
 public class Goods {
-    private int goodId;
+    private String goodId;
     private String goodName;
-    private int typeId;
+    private int mallTypeId;
     private int saleTypeId;
     private int counts;
     private String detail;
     private float price;
     private float priceDis;
     private float discount;
+    private String createTime;
+    private String updateTime;
 
 
-    public int getGoodId() {
+    public String getGoodId() {
         return goodId;
     }
 
-    public void setGoodId(int goodId) {
+    public void setGoodId(String goodId) {
         this.goodId = goodId;
     }
 
@@ -28,12 +30,12 @@ public class Goods {
         this.goodName = goodName;
     }
 
-    public int getTypeId() {
-        return typeId;
+    public int getMallTypeId() {
+        return mallTypeId;
     }
 
-    public void setTypeId(int typeId) {
-        this.typeId = typeId;
+    public void setMallTypeId(int mallTypeId) {
+        this.mallTypeId = mallTypeId;
     }
 
     public int getSaleTypeId() {
@@ -84,19 +86,36 @@ public class Goods {
         this.discount = discount;
     }
 
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
+    }
 
     @Override
     public String toString() {
         return "Goods{" +
-                "goodId=" + goodId +
+                "goodId='" + goodId + '\'' +
                 ", goodName='" + goodName + '\'' +
-                ", typeId=" + typeId +
+                ", mallTypeId=" + mallTypeId +
                 ", saleTypeId=" + saleTypeId +
                 ", counts=" + counts +
                 ", detail='" + detail + '\'' +
                 ", price=" + price +
                 ", priceDis=" + priceDis +
                 ", discount=" + discount +
+                ", createTime='" + createTime + '\'' +
+                ", updateTime='" + updateTime + '\'' +
                 '}';
     }
 }
