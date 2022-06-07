@@ -8,7 +8,10 @@ spring:
     username: root
     password: 123456
     # 数据库连接地址
-    url: jdbc:mysql://127.0.0.1:3306/market?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    # 本地  root 123456
+    # url: jdbc:mysql://127.0.0.1:3306/market?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    # 服务器
+    url: jdbc:mysql://121.4.175.242:3306/market?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     # 数据库驱动：
     driver-class-name: com.mysql.cj.jdbc.Driver
   jackson:

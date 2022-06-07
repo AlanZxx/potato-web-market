@@ -82,7 +82,7 @@ public class MallTypeController {
     @ResponseBody
     @RequestMapping(value = "/getMallTypeIdList", method = RequestMethod.POST)
     @Validated
-    public Result getMallTypeIdList() {
+    public Result getMallTypeIdListid() {
         Map<String, List> resultMap = new HashMap<>();
         //访问数据库user表，查询user表的数据量
         List mallTypes = mallServicel.getIdNameFromMallType();
