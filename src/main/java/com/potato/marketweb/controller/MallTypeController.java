@@ -24,7 +24,7 @@ public class MallTypeController {
 
     //    查询所有列表
     @ResponseBody
-    @RequestMapping("/getMallTypeList")
+    @RequestMapping(value = "/getAllMallTypeList", method = RequestMethod.GET)
     public Result getMallTypeList() {
         //访问数据库user表，查询user表的数据量
         List mallTypes = mallServicel.getMallTypeList();
@@ -80,15 +80,11 @@ public class MallTypeController {
 
     //根据id获取种类
     @ResponseBody
-    @RequestMapping(value = "/getMallTypeIdList", method = RequestMethod.POST)
+    @RequestMapping(value = "/getMallTypeById", method = RequestMethod.POST)
     @Validated
-    public Result getMallTypeIdListid() {
+    public Result getMallTypeById(Integer id) {
         Map<String, List> resultMap = new HashMap<>();
-        //访问数据库user表，查询user表的数据量
         List mallTypes = mallServicel.getIdNameFromMallType();
-        List saleTypes = saleTypeService.getIdNameFromSaleType();
-        resultMap.put("mallTypeList", mallTypes);
-        resultMap.put("saleTypeList", saleTypes);
         return Result.success(resultMap);
     }
 

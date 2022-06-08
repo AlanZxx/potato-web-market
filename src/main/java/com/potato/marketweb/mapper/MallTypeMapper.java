@@ -33,4 +33,7 @@ public interface MallTypeMapper {
             "                \"\\t`typeId` = \"+#{typeId,jdbcType=VARCHAR}")
     int modMallType(MallType mallType);
 
+
+    @Select("SELECT * from malltype where ")
+    MallType getMallTypeByid(Integer id);
 }

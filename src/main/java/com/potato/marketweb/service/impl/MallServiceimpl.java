@@ -39,4 +39,9 @@ public class MallServiceimpl implements MallService {
         return mallTypeMapper.modMallType(mallType);
     }
 
+
+    public MallType getMallTypeByid(Integer id){
+        return mallTypeMapper.getMallTypeByid(id);
+    }
+
 }
