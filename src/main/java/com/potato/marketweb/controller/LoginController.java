@@ -15,8 +15,9 @@ import java.util.Map;
 public class LoginController {
     @Autowired
     UserService userService;
+
     @RequestMapping("/user/login")
-    public String doLogin(User user, Map<String,Object> map, HttpSession session){
+    public String doLogin(User user, Map<String, Object> map, HttpSession session) {
         //从数据库中查询用户信息
         User loginUser = userService.getByUserNameAndPassword(user);
         if (loginUser != null) {
@@ -32,9 +33,15 @@ public class LoginController {
     }
 
     @ResponseBody
+    @RequestMapping("/helloworld")
+    public Result helloworld() {
+        return Result.success("你好，小豆子");
+    }
+
+    @ResponseBody
     @RequestMapping("/login")
-    public Result login(){
-        String id ="1";
+    public Result login() {
+        String id = "1";
         //从数据库中查询用户信息
         User loginUser = userService.getUserByUserid(id);
         System.out.println(loginUser.getEmail());
