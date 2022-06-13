@@ -1,6 +1,7 @@
 package com.potato.marketweb.controller;
 
 import com.potato.marketweb.bean.MallType;
+import com.potato.marketweb.commonUtil.CommonUtil;
 import com.potato.marketweb.commonUtil.Result;
 import com.potato.marketweb.service.MallService;
 import com.potato.marketweb.service.SaleTypeService;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -36,13 +38,14 @@ public class MallTypeController {
     @RequestMapping(value = "/addMallType", method = RequestMethod.POST)
     @Validated
     public Result addMallType(@RequestBody MallType mallType) {
-//        List mallTypes = jdbcTemplate.queryForList("SELECT * from malltype where typeName = '" + mallType.getTypeName()+"'");
-//        if (mallTypes.size() != 0) {
-////            return Result.fail("当前已有种类");
-//        }
+        if(mallServicel.getMallTypeByName(mallType.getMallTypeName())!=null){
+            return Result.failed("当前种类已存在，请勿重复添加");
+        }
         String dateNowStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTimeInMillis());
         mallType.setCreateTime(dateNowStr);
         mallType.setUpdateTime(dateNowStr);
+        mallType.setCreateOpId(CommonUtil.getUserId());
+        mallType.setUpdateOpId(CommonUtil.getUserId());
         if (mallServicel.addMallType(mallType) == 1) {
             return Result.success("添加成功");
         } else {
@@ -58,7 +61,6 @@ public class MallTypeController {
         if (mallServicel.delMallType(idList) > 0) {
             return Result.success("删除成功");
         } else {
-
             return Result.failed("添加成功");
         }
     }

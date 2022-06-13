@@ -9,6 +9,10 @@ public class MallType {
     private String createTime;
     private String updateTime;
     private String detail;
+    private String createOpId;
+    private String updateOpId;
+    private int mallTypeLevel;
+    private int parentId;
 
     public int getMallTypeId() {
         return mallTypeId;
@@ -66,6 +70,38 @@ public class MallType {
         this.detail = detail;
     }
 
+    public String getCreateOpId() {
+        return createOpId;
+    }
+
+    public void setCreateOpId(String createOpId) {
+        this.createOpId = createOpId;
+    }
+
+    public String getUpdateOpId() {
+        return updateOpId;
+    }
+
+    public void setUpdateOpId(String updateOpId) {
+        this.updateOpId = updateOpId;
+    }
+
+    public int getMallTypeLevel() {
+        return mallTypeLevel;
+    }
+
+    public void setMallTypeLevel(int mallTypeLevel) {
+        this.mallTypeLevel = mallTypeLevel;
+    }
+
+    public int getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(int parentId) {
+        this.parentId = parentId;
+    }
+
     @Override
     public String toString() {
         return "MallType{" +
@@ -76,6 +112,10 @@ public class MallType {
                 ", createTime='" + createTime + '\'' +
                 ", updateTime='" + updateTime + '\'' +
                 ", detail='" + detail + '\'' +
+                ", createOpId='" + createOpId + '\'' +
+                ", updateOpId='" + updateOpId + '\'' +
+                ", mallTypeLevel=" + mallTypeLevel +
+                ", parentId=" + parentId +
                 '}';
     }
 }

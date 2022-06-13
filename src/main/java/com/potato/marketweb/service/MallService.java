@@ -11,4 +11,5 @@ public interface MallService {
     int delMallType(String idList);
     List<Map> getIdNameFromMallType();
     int modMallType(MallType mallType);
+    MallType getMallTypeByName(String malltypename);
 }

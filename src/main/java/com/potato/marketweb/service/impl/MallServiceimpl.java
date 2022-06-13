@@ -40,8 +40,11 @@ public class MallServiceimpl implements MallService {
     }
 
 
-    public MallType getMallTypeByid(Integer id){
+    public MallType getMallTypeByid(Integer id) {
         return mallTypeMapper.getMallTypeByid(id);
     }
 
+    public MallType getMallTypeByName(String malltypename) {
+        return mallTypeMapper.getMallTypeByName(malltypename);
+    }
 }

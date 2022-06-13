@@ -13,9 +13,9 @@ public interface MallTypeMapper {
     List<MallType> getMallTypeList();
 
     //添加商品种类
-    @Insert("INSERT INTO `market`.`malltype` (  `mallTypeName`, `mallCounts`, `mallTypeStatus`, `createTime`, `updateTime`, `detail` )\n" +
+    @Insert("INSERT INTO `market`.`malltype` ( `mallTypeName`, `mallCounts`, `mallTypeStatus`, `createTime`, `updateTime`, `detail`, `createOpId`, `updateOpId`, `mallTypeLevel`, `parentId` )\n" +
             "VALUES\n" +
-            "\t( #{mallTypeName} ,#{mallCounts} ,#{mallTypeStatus}, #{createTime}, #{updateTime}, #{detail} );")
+            "\t( #{mallTypeName}, #{mallCounts}, #{mallTypeStatus}, #{createTime}, #{updateTime}, #{detail}, #{createOpId}, #{updateOpId}, #{mallTypeLevel}, #{parentId} );")
     int addMallType(MallType mallType);
 
     //添加商品种类
@@ -36,4 +36,8 @@ public interface MallTypeMapper {
 
     @Select("SELECT * from malltype where ")
     MallType getMallTypeByid(Integer id);
+
+
+    @Select("select * from malltype where malltypename = #{malltypename}")
+    MallType getMallTypeByName(String malltypename);
 }
