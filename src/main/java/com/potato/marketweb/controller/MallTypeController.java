@@ -1,7 +1,7 @@
 package com.potato.marketweb.controller;
 
 import com.potato.marketweb.bean.MallType;
-//import com.potato.marketweb.commonUtil.CommonUtil;
+import com.potato.marketweb.commonUtil.CommonUtil;
 import com.potato.marketweb.commonUtil.Result;
 import com.potato.marketweb.service.MallService;
 import com.potato.marketweb.service.SaleTypeService;
@@ -45,10 +45,8 @@ public class MallTypeController {
         String dateNowStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTimeInMillis());
         mallType.setCreateTime(dateNowStr);
         mallType.setUpdateTime(dateNowStr);
-//        mallType.setCreateOpId(CommonUtil.getUserId());
-//        mallType.setUpdateOpId(CommonUtil.getUserId());
-        mallType.setCreateOpId("11");
-        mallType.setUpdateOpId("11");
+        mallType.setCreateOpId(CommonUtil.getUserId());
+        mallType.setUpdateOpId(CommonUtil.getUserId());
         if (mallServicel.addMallType(mallType) == 1) {
             return Result.success("添加成功");
         } else {
