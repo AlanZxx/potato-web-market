@@ -14,11 +14,6 @@ public class MallServiceimpl implements MallService {
     @Autowired
     MallTypeMapper mallTypeMapper;
 
-    @Override
-    public List<MallType> getMallTypeList() {
-        List<MallType> list = mallTypeMapper.getMallTypeList();
-        return list;
-    }
 
     @Override
     public int addMallType(MallType mallType) {
@@ -26,10 +21,20 @@ public class MallServiceimpl implements MallService {
     }
 
     @Override
-    public int delMallType(String idList) {
-        return mallTypeMapper.delMallType(idList);
+    public int delMallTypeById(String idList) {
+        return mallTypeMapper.delMallTypeById(idList);
     }
 
+    @Override
+    public List<MallType> getMallTypeByLevel(int level) {
+        return mallTypeMapper.getMallTypeByLevel(level);
+    }
+
+    @Override
+    public List<MallType> getMallTypeList() {
+        List<MallType> list = mallTypeMapper.getMallTypeList();
+        return list;
+    }
     @Override
     public List<Map> getIdNameFromMallType() {
         return mallTypeMapper.getIdNameFromMallType();

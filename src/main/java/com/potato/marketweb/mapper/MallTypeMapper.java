@@ -18,9 +18,13 @@ public interface MallTypeMapper {
             "\t( #{mallTypeName}, #{mallCounts}, #{mallTypeStatus}, #{createTime}, #{updateTime}, #{detail}, #{createOpId}, #{updateOpId}, #{mallTypeLevel}, #{parentId} );")
     int addMallType(MallType mallType);
 
-    //添加商品种类
-    @Delete("delete from malltype where typeId in #{idList,jdbcType=INTEGER}")
-    int delMallType(String idList);
+    //通过商品种类id删除商品种类
+    @Delete("delete from malltype  where mallTypeId in ( ${idList})")
+    int delMallTypeById(String idList);
+
+    //根据种类获取销售种类信息
+    @Select("SELECT * from malltype where mallTypeLevel = #{level}")
+    List<MallType> getMallTypeByLevel(int level);
 
     @Select("SELECT typeId as id,typeName as name from malltype")
     List<Map> getIdNameFromMallType();

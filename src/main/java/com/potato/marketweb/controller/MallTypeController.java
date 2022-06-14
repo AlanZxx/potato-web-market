@@ -1,10 +1,11 @@
 package com.potato.marketweb.controller;
 
 import com.potato.marketweb.bean.MallType;
-import com.potato.marketweb.commonUtil.CommonUtil;
+//import com.potato.marketweb.commonUtil.CommonUtil;
 import com.potato.marketweb.commonUtil.Result;
 import com.potato.marketweb.service.MallService;
 import com.potato.marketweb.service.SaleTypeService;
+import com.sun.deploy.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
@@ -44,8 +45,10 @@ public class MallTypeController {
         String dateNowStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTimeInMillis());
         mallType.setCreateTime(dateNowStr);
         mallType.setUpdateTime(dateNowStr);
-        mallType.setCreateOpId(CommonUtil.getUserId());
-        mallType.setUpdateOpId(CommonUtil.getUserId());
+//        mallType.setCreateOpId(CommonUtil.getUserId());
+//        mallType.setUpdateOpId(CommonUtil.getUserId());
+        mallType.setCreateOpId("11");
+        mallType.setUpdateOpId("11");
         if (mallServicel.addMallType(mallType) == 1) {
             return Result.success("添加成功");
         } else {
@@ -53,31 +56,31 @@ public class MallTypeController {
         }
     }
 
+
     //    删除种类
     @ResponseBody
-    @RequestMapping(value = "/delMallType", method = RequestMethod.POST)
+    @RequestMapping(value = "/delMallTypeByid", method = RequestMethod.POST)
     @Validated
-    public Result delMallType(@RequestParam(value = "idList", required = false) String idList) {
-        if (mallServicel.delMallType(idList) > 0) {
+    public Result delMallTypeByid(@RequestBody List<String> idList) {
+        if(idList.isEmpty()){
+            return Result.failed("无可删除商品种类");
+        }
+        String sbIdList = "'"+ StringUtils.join(idList,"','")+"'";
+        if (mallServicel.delMallTypeById(sbIdList) > 0) {
             return Result.success("删除成功");
         } else {
-            return Result.failed("添加成功");
+            return Result.failed("删除失败");
         }
     }
 
 
-    //获取所有种类列表
+    //根据级别获取种类
     @ResponseBody
-    @RequestMapping(value = "/getMallTypeIdList", method = RequestMethod.GET)
+    @RequestMapping(value = "/getMallTypeByLevel", method = RequestMethod.POST)
     @Validated
-    public Result getMallTypeIdList() {
-        Map<String, List> resultMap = new HashMap<>();
-        //访问数据库user表，查询user表的数据量
-        List mallTypes = mallServicel.getIdNameFromMallType();
-        List saleTypes = saleTypeService.getIdNameFromSaleType();
-        resultMap.put("mallTypeList", mallTypes);
-        resultMap.put("saleTypeList", saleTypes);
-        return Result.success(resultMap);
+    public Result getMallTypeByLevel(@RequestBody int mallTypeLevel) {
+        List mallTypes = mallServicel.getMallTypeByLevel(mallTypeLevel);
+        return Result.success(mallTypes);
     }
 
     //根据id获取种类

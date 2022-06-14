@@ -6,9 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 public interface MallService {
-    List<MallType> getMallTypeList();
     int addMallType(MallType mallType);
-    int delMallType(String idList);
+    int delMallTypeById(String idList);
+    List <MallType> getMallTypeByLevel(int level);
+    List<MallType> getMallTypeList();
     List<Map> getIdNameFromMallType();
     int modMallType(MallType mallType);
     MallType getMallTypeByName(String malltypename);
