@@ -2,7 +2,7 @@ package com.potato.marketweb.controller;
 
 import com.potato.marketweb.bean.SaleType;
 import com.potato.marketweb.commonUtil.Result;
-import com.potato.marketweb.mapper.SaleTypeMapper;
+import com.potato.marketweb.mapper.mysqlmapper.SaleTypeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;

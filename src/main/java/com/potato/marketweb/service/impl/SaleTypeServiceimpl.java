@@ -1,7 +1,7 @@
 package com.potato.marketweb.service.impl;
 
 import com.potato.marketweb.bean.SaleType;
-import com.potato.marketweb.mapper.SaleTypeMapper;
+import com.potato.marketweb.mapper.mysqlmapper.SaleTypeMapper;
 import com.potato.marketweb.service.SaleTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

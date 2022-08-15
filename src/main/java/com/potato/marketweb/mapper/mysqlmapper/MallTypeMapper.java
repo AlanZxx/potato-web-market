@@ -1,4 +1,4 @@
-package com.potato.marketweb.mapper;
+package com.potato.marketweb.mapper.mysqlmapper;
 
 import com.potato.marketweb.bean.MallType;
 import org.apache.ibatis.annotations.*;

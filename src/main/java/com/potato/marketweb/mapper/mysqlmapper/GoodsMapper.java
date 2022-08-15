@@ -1,11 +1,8 @@
-package com.potato.marketweb.mapper;
+package com.potato.marketweb.mapper.mysqlmapper;
 
 import com.potato.marketweb.bean.Goods;
-import com.potato.marketweb.bean.SaleType;
 import org.apache.ibatis.annotations.*;
 
-import java.util.List;
-import java.util.Map;
 
 @Mapper
 public interface GoodsMapper {

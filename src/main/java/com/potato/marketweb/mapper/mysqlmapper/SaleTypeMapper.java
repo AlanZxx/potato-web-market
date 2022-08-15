@@ -1,4 +1,4 @@
-package com.potato.marketweb.mapper;
+package com.potato.marketweb.mapper.mysqlmapper;
 
 import com.potato.marketweb.bean.SaleType;
 import com.potato.marketweb.commonUtil.Result;
